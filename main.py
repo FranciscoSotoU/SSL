@@ -1,3 +1,2 @@
-a = 2
-
-b= 3
+import numpy as np
+a = np.arange(2)
