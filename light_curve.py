@@ -30,6 +30,10 @@ class LightCurve():
 
     def __len__(self):
         return len(self.times)
+    def members(self):
+        all_members = self.__dict__.keys()
+
+        return [ (item, self.__dict__[item]) for item in all_members if not item.startswith("_")]
 
     def split(self, n_min=0, n_max=np.inf):
         inds = np.arange(len(self.times))
