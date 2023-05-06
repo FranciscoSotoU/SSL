@@ -23,14 +23,17 @@ class LightCurve():
         self.p_signif = p_signif
         self.p_class = p_class
         self.ss_resid = ss_resid
-
+        
     def __repr__(self):
         return "LightCurve(" + ', '.join("{}={}".format(k, v)
                                          for k, v in self.__dict__.items()) + ")"
 
     def __len__(self):
         return len(self.times)
-
+    def min_value(self):
+        return min(self.measurements)
+    def max_value(self):
+        return max(self.measurements)
     def split(self, n_min=0, n_max=np.inf):
         inds = np.arange(len(self.times))
         splits = [np.array(x)
@@ -74,7 +77,8 @@ class LightCurve():
         self.times = self.times[inds]
         self.measurements = self.measurements[inds]
         self.errors = self.errors[inds]
-
+    def normalize(self,min,max):
+        self.measurements =  -1 + (self.measurements - min)/(max - min)*2
     def load_asas():
         light_curves = []
         bigmacc = pd.read_csv('data/asas/asas_class_catalog_v3_0.csv', index_col='ASAS_ID')
