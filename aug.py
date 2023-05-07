@@ -32,25 +32,30 @@ def time_flip(tensor):
     mag = tensor[1]
     time_flipped = torch.flip(time,dims=[0])
 
-    return [time_flipped,mag]
+    return torch.stack([time_flipped,mag])
 
 def mag_flip(tensor):
     time = tensor[0]
     mag = tensor[1]
     mag_flipped = -mag
 
-    return [time,mag_flipped]
+    return torch.stack([time,mag_flipped])
 
 def zero_masking(tensor):
     factor = 0.3
     largo = len(tensor[1])
-    mask_len = largo * factor
-    mask = np.zeros(largo,dtype=bool)
-    start = random.randint(0,int(largo-mask_len))
-    end = start + mask_len
-    mask[ start:end  ] = True
+    mask_len = int(largo * factor)
+    mask = np.ones(largo,dtype=bool)
+    start = int(random.randint(0,int(largo-mask_len)))
+    end = int(start + mask_len)
+    if end>largo:
+        end = largo
+    mask[ start:end  ] = False
     mask = torch.tensor(mask.astype(int))
-    return tensor[1] * mask
+    values = tensor[1] * mask
+    times = tensor[0]
+
+    return torch.stack([times,values])
 
 
 
