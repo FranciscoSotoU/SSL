@@ -1,6 +1,6 @@
-path_macho = '/home/francisco/Documents/SSL/data/macho/full.pkl'
+path_macho = '/home/francisco/Documents/data/macho/full.pkl'
 data_macho = joblib.load(path_macho)
-path_asas = '/home/francisco/Documents/SSL/data/asas/full.pkl'
+path_asas = '/home/francisco/Documents/data/asas/full.pkl'
 data_asas = joblib.load(path_asas)
-path_linear = '/home/francisco/Documents/SSL/data/linear/full.pkl'
+path_linear = '/home/francisco/Documents/data/linear/full.pkl'
 data_linear = joblib.load(path_linear)
